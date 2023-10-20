@@ -1,5 +1,8 @@
 import { dockerEnvVarFix } from './docker/envFix';
 
+export const SKIP_AUTH =
+  dockerEnvVarFix(process.env.NEXT_PUBLIC_SKIP_AUTH) === 'true' || false;
+
 export const DEBUG_MODE =
   dockerEnvVarFix(process.env.NEXT_PUBLIC_DEBUG_MODE) === 'true' || false;
 

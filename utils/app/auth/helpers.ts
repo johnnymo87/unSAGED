@@ -1,5 +1,7 @@
 import { getSession } from 'next-auth/react';
 
+import { SKIP_AUTH } from '@/utils/app/const';
+
 import { Session, User } from '@/types/auth';
 
 export const getClientSession = async () => {
@@ -28,6 +30,14 @@ export const getClientSession = async () => {
 };
 
 export const getUser = async () => {
+  if (SKIP_AUTH) {
+    return {
+      email: 'default_user',
+      image: null,
+      name: 'Default User',
+    };
+  }
+
   const session = await getClientSession();
 
   let user = session?.user;
