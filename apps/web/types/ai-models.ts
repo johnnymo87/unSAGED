@@ -1,7 +1,22 @@
 export type AiModel = {
   id: string;
-  maxLength: number; // maximum length of a message
+  // This `maxLength` variable is optional. If present, it guides the UI
+  // validation of the length of the user's input in the chat input. If it's
+  // over this value, the UI will show an error message. If absent, the UI will
+  // not do any validation.
+  maxLength: number;
+  // This `tokenLimit` variable controls the maximum value of the "Max Tokens"
+  // slider in the UI. If the user has enabled this paramter in the UI, we will
+  // use their value in the `body.max_tokens` field of the request. Otherwise,
+  // we will not set this value in the request.
+  //
+  // In the OpenAI API, the `max_tokens` field only specifies the max number of
+  // tokens that the model MAY generate in the completion. It is not
+  // necessarily the amount that the model WILL generate.
   tokenLimit: number;
+  // This `requestLimit` controls the maximum number of tokens that unSAGED
+  // will send to the model in a single request. If the user's input exceeds
+  // this value, the UI will show an error message.
   requestLimit: number;
   vendor: 'OpenAI' | 'Anthropic' | 'Google' | 'Ollama';
   type: 'text';
@@ -67,8 +82,16 @@ export const PossibleAiModels: PossibleAiModelsInterface = {
   'gpt-4-1106-preview': {
     id: 'gpt-4-1106-preview',
     maxLength: 500000,
-    tokenLimit: 128000,
-    requestLimit: 120000,
+    tokenLimit: 4096,
+    requestLimit: 128000,
+    vendor: 'OpenAI',
+    type: 'text',
+  },
+  'gpt-4-0125-preview': {
+    id: 'gpt-4-0125-preview',
+    maxLength: 500000,
+    tokenLimit: 4096,
+    requestLimit: 128000,
     vendor: 'OpenAI',
     type: 'text',
   },

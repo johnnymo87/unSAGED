@@ -30,7 +30,8 @@ export async function countTokensOpenAI(
   } else if (
     model.id === 'gpt-4' ||
     model.id === 'gpt-4-32k' ||
-    model.id === 'gpt-4-1106-preview'
+    model.id === 'gpt-4-1106-preview' ||
+    model.id === 'gpt-4-0125-preview'
   ) {
     tokens_per_message = 4;
   }
