@@ -54,10 +54,6 @@ export async function streamOpenAI(
     stream: true,
   }
 
-  if (model.id !== 'gpt-4-1106-preview') {
-    body.max_tokens = model.tokenLimit - tokenCount;
-  }
-
   if (params.temperature) {
     body.temperature = params.temperature;
   }
